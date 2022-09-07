@@ -13,6 +13,7 @@ export default class Arrow {
         const arrow = this.arrows.find(arrow=>arrow.x==coord.x&&arrow.y==coord.y);
         if(arrow){
             arrow.parent.removeChild(arrow);
+            this.arrows.splice(this.arrows.indexOf(arrow),1);
         }
     }
     create(coords:Coords){
@@ -40,10 +41,12 @@ export default class Arrow {
         this.arrows.forEach(arrow => {
             const p = { x: arrow.x, y: arrow.y };
             this.stage.on('pointermove', e => {
-                const angle = Number(Math.atan2(e.data.global.y - p.y, e.data.global.x - p.x).toFixed(3));
-                const distance = Number(Math.floor(Math.sqrt(Math.pow(e.data.global.y - p.y, 2) + Math.pow(e.data.global.x - p.x, 2))));
-                arrow.height = distance > 10 ? distance - 10 : 10;
-                arrow.rotation = angle - (Math.PI / 2);
+                if(arrow){
+                    const angle = Number(Math.atan2(e.data.global.y - p.y, e.data.global.x - p.x).toFixed(3));
+                    const distance = Number(Math.floor(Math.sqrt(Math.pow(e.data.global.y - p.y, 2) + Math.pow(e.data.global.x - p.x, 2))));
+                    arrow.height = distance > 10 ? distance - 10 : 10;
+                    arrow.rotation = angle - (Math.PI / 2);
+                }
             });
         })
     }
