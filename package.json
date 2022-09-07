@@ -16,7 +16,7 @@
         "pixi-viewport": "^4.32.0"
     },
     "devDependencies": {
-        "@types/pixi.js": "6.5.0",
+        "@types/pixi.js": "5.0.0",
         "parcel-bundler": "^1.12.4",
         "parcel-plugin-json-url-loader": "^0.1.2",
         "parcel-plugin-static-files-copy": "^2.4.3",

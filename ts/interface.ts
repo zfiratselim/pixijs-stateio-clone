@@ -11,4 +11,5 @@ export interface CenterOfState extends PIXI.Sprite{
 
 export interface StateInt extends PIXI.Sprite{
     fire:()=>void;
+    haveArrow:boolean
 }
