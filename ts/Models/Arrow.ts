@@ -1,10 +1,13 @@
 import * as PIXI from "pixi.js";
 import { Sprite } from "pixi.js";
+import { returnAngle } from "../helpers/angle";
+import { returnDistance } from "../helpers/distance";
 import { Coords } from "../interface";
 
 export default class Arrow {
     private arrows:Sprite[]=[];
-    private stage
+    private stage;
+
     constructor(stage){
         this.stage = stage;
     }
@@ -27,7 +30,7 @@ export default class Arrow {
     createHead(){
 
     }
-
+    getArrows = () => this.arrows;
     createTail(){
         const Tail = PIXI.Sprite.from(`../images/state.png`);
         Tail.anchor.set(.5,0);
@@ -39,14 +42,16 @@ export default class Arrow {
 
     update(){
         this.arrows.forEach(arrow => {
-            const p = { x: arrow.x, y: arrow.y };
             this.stage.on('pointermove', e => {
-                if(arrow){
-                    const angle = Number(Math.atan2(e.data.global.y - p.y, e.data.global.x - p.x).toFixed(3));
-                    const distance = Number(Math.floor(Math.sqrt(Math.pow(e.data.global.y - p.y, 2) + Math.pow(e.data.global.x - p.x, 2))));
+                if(!arrow){
+                    return
+                }
+                    const angle = returnAngle(arrow, e.data.global)
+                    const distance = returnDistance(arrow, e.data.global);
+
                     arrow.height = distance > 10 ? distance - 10 : 10;
                     arrow.rotation = angle - (Math.PI / 2);
-                }
+                
             });
         })
     }
