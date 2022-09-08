@@ -1,10 +1,9 @@
 import * as PIXI from "pixi.js";
 import State from "./Models/State";
-import Bullet from "./Models/Bullet";
+import { returnDistance } from "./helpers/distance";
 
 export default class Game extends PIXI.Application {
 private State = new State(this.stage);
-private Bullet = new Bullet(this.stage);
 
 constructor() {
     super({
@@ -21,9 +20,8 @@ constructor() {
 
   startGame() {
     this.ticker.add(delta=>this.update(delta));
-    const state = this.State.create({x:200,y:200});
-    const state2 = this.State.create({x:400,y:200},0xDD0000);
-    const Bullet = this.Bullet.create({x:380,y:200});
+    this.State.create({x:200,y:200});
+    this.State.create({x:400,y:200},0xDD0000,true);
   }
 
   update(delta){
