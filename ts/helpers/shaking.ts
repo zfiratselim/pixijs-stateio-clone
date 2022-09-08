@@ -16,6 +16,6 @@ export function shake(center){
         center.x=e.x;
         center.y=e.y;
         center.rotate=e.rotate;
-        },i*100)
+        },i*50)
     })
 }
